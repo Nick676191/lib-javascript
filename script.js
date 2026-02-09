@@ -1,4 +1,8 @@
 const myLibrary = [];
+// create table
+const tableDiv = document.querySelector(".tbl-container");
+const table = document.createElement("table");
+const header = document.createElement("tr");
 
 function Book(title, author, pages, read) {
     // object constructor
@@ -20,11 +24,6 @@ function addBookToLibrary(title, author, pages, read) {
 };
 
 function displayBooks() {
-    // create table
-    const tableDiv = document.querySelector(".tbl-container");
-    const table = document.createElement("table");
-    const header = document.createElement("tr");
-    
     // adding logic for add books button to be placed in the table container
     const addBookBtn = document.createElement("button");
     addBookBtn.textContent = "Add Book"
@@ -73,26 +72,28 @@ function displayBooks() {
     };
 };
 
-// function addBookBtnListener() {
-//     const bookBtn = document.querySelector("button")
-//     bookBtn.addEventListener("click", () => {
-//         const dialog = document.querySelector("dialog");
-//         dialog.showModal();
-
-//         const closeBtn = document.querySelector("dialog button");
-//         closeBtn.addEventListener("click", () => {dialog.close()})
-//     });
-// };
-
 function dialogOperator() {
     const dialog = document.querySelector("dialog");
     const showBtn = document.querySelector(".tbl-container > button");
-    const closeBtn = document.querySelector("dialog button");
+    const closeBtn = document.querySelector(".close");
+    const myForm = document.querySelector("form");
 
     // show when the dialog button is clicked 
     showBtn.addEventListener("click", () => {
         dialog.showModal();
     });
+
+    myForm.addEventListener("submit", (event) => {
+        // preventing page from reloading
+        event.preventDefault();
+        // add a row and move the contents from the form into that new row
+        const formData = new FormData(event.target);
+        const bookInfo = formData.getAll("book");
+        if (!bookInfo[3]) {
+            addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], false)
+        } else {addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], true)}
+        dialog.close();
+    })
 
     // close the dialog when button clicked
     closeBtn.addEventListener("click", () => {

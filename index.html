@@ -12,9 +12,29 @@
     <!-- dialog for the add book button -->
     <dialog>
         <p>GROOVY BOOK FORM</p>
-        <form action="" method="GET">
-            <button autofocus>Close</button>
+        <form id="book-form" method="POST">
+            <div>
+                <input id="title" name="book" type="text">
+                <label for="title">Title</label>
+            </div>
+
+            <div>
+                <input id="author" name="book" type="text">
+                <label for="author">Author</label>
+            </div>
+
+            <div>
+                <input id="page-count" name="book" type="number">
+                <label for="page-count">Page Count</label>
+            </div>
+
+            <div>
+                <input id="check" name="book" value="read" type="checkbox">
+                <label for="check">Read?</label>
+            </div>
+            <button type="submit" autofocus>Add</button>
         </form>
+        <button class="close">Close</button>
     </dialog>
 </body>
 </html>
