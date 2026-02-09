@@ -69,5 +69,7 @@ function displayBooks() {
 };
 
 addBookToLibrary("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 322, true);
+addBookToLibrary("The Dead Zone", "Stephen King", 528, false);
+addBookToLibrary("Frankenstein", "Mary Shelley", 352, false);
 displayBooks();
 console.log(myLibrary);

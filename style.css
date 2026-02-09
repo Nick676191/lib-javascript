@@ -15,7 +15,10 @@ td {
     border: 1px solid black;
 }
 
-tr:nth-child(odd),
-tr:nth-child(1):not {
+tr:nth-child(even){
   background-color: #eeeeee;
+}
+
+th {
+    background-color: #999999;
 }
