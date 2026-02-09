@@ -1,0 +1,21 @@
+table {
+    table-layout: fixed;
+    width: 90%;
+    margin: 10px auto;
+    border-collapse: collapse;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #999999;
+}
+
+th,
+td {
+    text-align: center;
+    vertical-align: top;
+    padding: 0.6em;
+    border: 1px solid black;
+}
+
+tr:nth-child(odd),
+tr:nth-child(1):not {
+  background-color: #eeeeee;
+}

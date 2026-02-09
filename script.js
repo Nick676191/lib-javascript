@@ -12,13 +12,8 @@ function Book(title, author, pages, read) {
     this.read = read;
 };
 
-function addBookToLibrary() {
+function addBookToLibrary(title, author, pages, read) {
     // take params, create a book then store it in the array
-    const title = "Harry Potter and the Sorcerer's Stone";
-    const author = "J.K. Rowling";
-    const pages = 322;
-    const read = true;
-
     const newBook = new Book(title, author, pages, read);
 
     myLibrary.push(newBook);
@@ -73,13 +68,6 @@ function displayBooks() {
     };
 };
 
-addBookToLibrary();
+addBookToLibrary("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 322, true);
 displayBooks();
 console.log(myLibrary);
-
-// for (let i of myLibrary) {
-//     for (let key in i) {
-//         console.log(i[key]);
-//     }
-// }
-
