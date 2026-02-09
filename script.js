@@ -24,6 +24,11 @@ function displayBooks() {
     const tableDiv = document.querySelector(".tbl-container");
     const table = document.createElement("table");
     const header = document.createElement("tr");
+    
+    // adding logic for add books button to be placed in the table container
+    const addBookBtn = document.createElement("button");
+    addBookBtn.textContent = "Add Book"
+    tableDiv.appendChild(addBookBtn);
 
     if (myLibrary.length > 0) {
         for (const headerKey in myLibrary[0]) {
