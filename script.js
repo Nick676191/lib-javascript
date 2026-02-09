@@ -73,8 +73,36 @@ function displayBooks() {
     };
 };
 
+// function addBookBtnListener() {
+//     const bookBtn = document.querySelector("button")
+//     bookBtn.addEventListener("click", () => {
+//         const dialog = document.querySelector("dialog");
+//         dialog.showModal();
+
+//         const closeBtn = document.querySelector("dialog button");
+//         closeBtn.addEventListener("click", () => {dialog.close()})
+//     });
+// };
+
+function dialogOperator() {
+    const dialog = document.querySelector("dialog");
+    const showBtn = document.querySelector(".tbl-container > button");
+    const closeBtn = document.querySelector("dialog button");
+
+    // show when the dialog button is clicked 
+    showBtn.addEventListener("click", () => {
+        dialog.showModal();
+    });
+
+    // close the dialog when button clicked
+    closeBtn.addEventListener("click", () => {
+        dialog.close()
+    });
+};
+
 addBookToLibrary("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 322, true);
 addBookToLibrary("The Dead Zone", "Stephen King", 528, false);
 addBookToLibrary("Frankenstein", "Mary Shelley", 352, false);
 displayBooks();
+dialogOperator();
 console.log(myLibrary);
