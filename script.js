@@ -1,8 +1,46 @@
 const myLibrary = [];
 // create table
-const tableDiv = document.querySelector(".tbl-container");
-const table = document.createElement("table");
-const header = document.createElement("tr");
+let tableDiv = document.querySelector(".tbl-container");
+let table = document.createElement("table");
+let header = document.createElement("tr");
+
+// adding logic for add books button to be placed in the table container
+let addBookBtn = document.createElement("button");
+addBookBtn.textContent = "Add Book"
+tableDiv.appendChild(addBookBtn);
+
+// creating table framework
+if (myLibrary.length > 0) {
+    for (const headerKey in myLibrary[0]) {
+        const headerItem = document.createElement("th");
+        headerItem.append(headerKey);
+        header.appendChild(headerItem);
+    };
+} else {
+    const headOne = document.createElement("th");
+    headOne.append("id")
+
+    const headTwo = document.createElement("th");
+    headTwo.append("title");
+
+    const headThree = document.createElement("th");
+    headThree.append("author");
+
+    const headFour = document.createElement("th");
+    headFour.append("pages");
+
+    const headFive = document.createElement("th");
+    headFive.append("read");
+
+    header.appendChild(headOne);
+    header.appendChild(headTwo);
+    header.appendChild(headThree);
+    header.appendChild(headFour);
+    header.appendChild(headFive);
+};
+
+tableDiv.appendChild(table);
+table.appendChild(header);
 
 function Book(title, author, pages, read) {
     // object constructor
@@ -21,67 +59,28 @@ function addBookToLibrary(title, author, pages, read) {
     const newBook = new Book(title, author, pages, read);
 
     myLibrary.push(newBook);
+
+    return newBook
+};
+function displayBook(book) {
+    const row = document.createElement("tr");
+    table.appendChild(row);
+    for (const key in book) {
+        const dataCell = document.createElement("td");
+        dataCell.append(book[key]);
+        row.appendChild(dataCell);
+    };
 };
 
 function displayBooks() {
-    // adding logic for add books button to be placed in the table container
-    const addBookBtn = document.createElement("button");
-    addBookBtn.textContent = "Add Book"
-    tableDiv.appendChild(addBookBtn);
-
-    if (myLibrary.length > 0) {
-        for (const headerKey in myLibrary[0]) {
-            const headerItem = document.createElement("th");
-            headerItem.append(headerKey);
-            header.appendChild(headerItem);
-        };
-    } else {
-        const headOne = document.createElement("th");
-        headOne.appendChild("id")
-
-        const headTwo = document.createElement("th");
-        headTwo.appendChild("title");
-
-        const headThree = document.createElement("th");
-        headThree.appendChild("author");
-
-        const headFour = document.createElement("th");
-        headFour.appendChild("pages");
-
-        const headFive = document.createElement("th");
-        headFive.appendChild("read");
-
-        header.appendChild(headOne);
-        header.appendChild(headTwo);
-        header.appendChild(headThree);
-        header.appendChild(headFour);
-        header.appendChild(headFive);
-    };
-
-    tableDiv.appendChild(table);
-    table.appendChild(header);
-
     for (const book of myLibrary) {
-        const row = document.createElement("tr");
-        table.appendChild(row);
-        for (const key in book) {
-            const dataCell = document.createElement("td");
-            dataCell.append(book[key]);
-            row.appendChild(dataCell);
-        };
+        displayBook(book);
     };
 };
 
-function dialogOperator() {
-    const dialog = document.querySelector("dialog");
-    const showBtn = document.querySelector(".tbl-container > button");
-    const closeBtn = document.querySelector(".close");
+function addBookFromDialog() {
     const myForm = document.querySelector("form");
-
-    // show when the dialog button is clicked 
-    showBtn.addEventListener("click", () => {
-        dialog.showModal();
-    });
+    const dialog = document.querySelector("dialog");
 
     myForm.addEventListener("submit", (event) => {
         // preventing page from reloading
@@ -90,10 +89,26 @@ function dialogOperator() {
         const formData = new FormData(event.target);
         const bookInfo = formData.getAll("book");
         if (!bookInfo[3]) {
-            addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], false)
-        } else {addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], true)}
+            const new_book = addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], false);
+            displayBook(new_book);
+        } else {
+            const new_book = addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], true);
+            displayBook(new_book);
+        }
         dialog.close();
-    })
+        myForm.reset();
+    });
+};
+
+function dialogOperator() {
+    const dialog = document.querySelector("dialog");
+    const showBtn = document.querySelector(".tbl-container > button");
+    const closeBtn = document.querySelector(".close");
+
+    // show when the dialog button is clicked 
+    showBtn.addEventListener("click", () => {
+        dialog.showModal();
+    });
 
     // close the dialog when button clicked
     closeBtn.addEventListener("click", () => {
@@ -105,5 +120,6 @@ addBookToLibrary("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 322, t
 addBookToLibrary("The Dead Zone", "Stephen King", 528, false);
 addBookToLibrary("Frankenstein", "Mary Shelley", 352, false);
 displayBooks();
+addBookFromDialog();
 dialogOperator();
 console.log(myLibrary);
