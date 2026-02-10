@@ -47,6 +47,17 @@ function createRemoveBtn() {
     return removeBtn;
 };
 
+function checkNoCheck(read) {
+    const check = document.createElement("input");
+    check.setAttribute("type", "checkbox");
+    if (read) {
+        check.checked = true;
+    } else {
+        check.checked = false;
+    }
+    return check;
+};
+
 function Book(title, author, pages, read) {
     // object constructor
     if (!new.target) {
@@ -56,7 +67,7 @@ function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.read = checkNoCheck(read);
     this.remove = createRemoveBtn();
 };
 
