@@ -10,37 +10,48 @@ addBookBtn.textContent = "Add Book"
 tableDiv.appendChild(addBookBtn);
 
 // creating table framework
-if (myLibrary.length > 0) {
-    for (const headerKey in myLibrary[0]) {
-        const headerItem = document.createElement("th");
-        headerItem.append(headerKey);
-        header.appendChild(headerItem);
-    };
-} else {
-    const headOne = document.createElement("th");
-    headOne.append("id")
+// if (myLibrary.length > 0) {
+//     for (const headerKey in myLibrary[0]) {
+//         const headerItem = document.createElement("th");
+//         headerItem.append(headerKey);
+//         header.appendChild(headerItem);
+//     };
+// } else {}
+const headOne = document.createElement("th");
+headOne.append("id")
 
-    const headTwo = document.createElement("th");
-    headTwo.append("title");
+const headTwo = document.createElement("th");
+headTwo.append("title");
 
-    const headThree = document.createElement("th");
-    headThree.append("author");
+const headThree = document.createElement("th");
+headThree.append("author");
 
-    const headFour = document.createElement("th");
-    headFour.append("pages");
+const headFour = document.createElement("th");
+headFour.append("pages");
 
-    const headFive = document.createElement("th");
-    headFive.append("read");
+const headFive = document.createElement("th");
+headFive.append("read");
 
-    header.appendChild(headOne);
-    header.appendChild(headTwo);
-    header.appendChild(headThree);
-    header.appendChild(headFour);
-    header.appendChild(headFive);
-};
+const headSix = document.createElement("th");
+headSix.append("remove");
+
+header.appendChild(headOne);
+header.appendChild(headTwo);
+header.appendChild(headThree);
+header.appendChild(headFour);
+header.appendChild(headFive);
+header.appendChild(headSix);
 
 tableDiv.appendChild(table);
 table.appendChild(header);
+
+function createRemoveBtn() {
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Delete";
+    removeBtn.className = "remove";
+    removeBtn.style.padding = "2px";
+    return removeBtn;
+};
 
 function Book(title, author, pages, read) {
     // object constructor
@@ -52,6 +63,7 @@ function Book(title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.remove = createRemoveBtn();
 };
 
 function addBookToLibrary(title, author, pages, read) {
