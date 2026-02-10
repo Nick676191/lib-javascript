@@ -9,14 +9,7 @@ let addBookBtn = document.createElement("button");
 addBookBtn.textContent = "Add Book"
 tableDiv.appendChild(addBookBtn);
 
-// creating table framework
-// if (myLibrary.length > 0) {
-//     for (const headerKey in myLibrary[0]) {
-//         const headerItem = document.createElement("th");
-//         headerItem.append(headerKey);
-//         header.appendChild(headerItem);
-//     };
-// } else {}
+// creating table framework in js code
 const headOne = document.createElement("th");
 headOne.append("id")
 
@@ -50,6 +43,7 @@ function createRemoveBtn() {
     removeBtn.textContent = "Delete";
     removeBtn.className = "remove";
     removeBtn.style.padding = "2px";
+    
     return removeBtn;
 };
 
@@ -74,6 +68,19 @@ function addBookToLibrary(title, author, pages, read) {
 
     return newBook
 };
+
+function removeBookFromLibrary() {
+    let delBtns = document.querySelectorAll(".remove");
+    for (btn of delBtns) {
+        const btnCont = btn.parentElement;
+        const btnRow = btnCont.parentElement;
+        btn.addEventListener("click", () => {
+            // delete the specific row that I clicked the delete button within
+            btnRow.remove();
+        });
+    };
+};
+
 function displayBook(book) {
     const row = document.createElement("tr");
     table.appendChild(row);
@@ -107,6 +114,7 @@ function addBookFromDialog() {
             const new_book = addBookToLibrary(bookInfo[0], bookInfo[1], bookInfo[2], true);
             displayBook(new_book);
         }
+        removeBookFromLibrary();
         dialog.close();
         myForm.reset();
     });
@@ -133,5 +141,5 @@ addBookToLibrary("The Dead Zone", "Stephen King", 528, false);
 addBookToLibrary("Frankenstein", "Mary Shelley", 352, false);
 displayBooks();
 addBookFromDialog();
+removeBookFromLibrary();
 dialogOperator();
-console.log(myLibrary);
