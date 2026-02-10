@@ -52,3 +52,18 @@ dialog button {
     text-align: center;
     align-self: center;
 }
+
+form {
+    margin-bottom: 5px;
+}
+
+/* styling the form */
+form > div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 50px;
+}
+
+input#check {
+    align-self: flex-start;
+}
